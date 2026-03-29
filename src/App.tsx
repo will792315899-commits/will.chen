@@ -4,6 +4,7 @@ import { FloatingTags } from './components/FloatingTags';
 import { AudioWave } from './components/AudioWave';
 import { PhotoUploader } from './components/PhotoUploader';
 import { ResultCard } from './components/ResultCard';
+import { MusicToggle } from './components/MusicToggle';
 import { analyzePhoto } from './api/anthropic';
 import type { AnalysisResult } from './types';
 
@@ -69,6 +70,9 @@ export default function App() {
     <div style={{ minHeight: '100vh', background: '#0a0a0f', position: 'relative' }}>
       {/* Layer 0: stars */}
       <StarField />
+
+      {/* Music toggle button (top-right) */}
+      <MusicToggle />
 
       {/* Layer 1: floating tags */}
       {result && <FloatingTags tags={result.tags} />}
