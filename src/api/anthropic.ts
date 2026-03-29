@@ -1,20 +1,9 @@
 import type { AnalysisResult } from '../types';
 
 export async function analyzePhoto(imageBase64: string, mimeType: string): Promise<AnalysisResult> {
-  const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
-
-  if (!apiKey) {
-    throw new Error('请在 .env.local 中配置 VITE_ANTHROPIC_API_KEY');
-  }
-
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const response = await fetch('/api/analyze', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1024,
@@ -24,11 +13,7 @@ export async function analyzePhoto(imageBase64: string, mimeType: string): Promi
           content: [
             {
               type: 'image',
-              source: {
-                type: 'base64',
-                media_type: mimeType,
-                data: imageBase64,
-              },
+              source: { type: 'base64', media_type: mimeType, data: imageBase64 },
             },
             {
               type: 'text',
@@ -54,13 +39,11 @@ tags要求：6-10个词，每词2-4字，涵盖照片中的视觉元素、色彩
 
   if (!response.ok) {
     const errBody = await response.json().catch(() => ({})) as { error?: { message?: string } };
-    throw new Error(errBody.error?.message ?? `API 请求失败 (${response.status})`);
+    throw new Error(errBody.error?.message ?? `请求失败 (${response.status})`);
   }
 
   const data = await response.json() as { content: Array<{ text: string }> };
   const raw = data.content[0].text.trim();
-
-  // Strip markdown code fences if present
   const jsonStr = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
   const match = jsonStr.match(/\{[\s\S]*\}/);
   if (!match) throw new Error('无法解析返回数据，请重试');
