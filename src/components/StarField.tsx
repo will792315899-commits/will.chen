@@ -1,15 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-interface Star {
-  x: number; y: number;
-  size: number; opacity: number;
-  speed: number; offset: number;
-}
-
-interface Dust {
+interface Mote {
   x: number; y: number;
   vx: number; vy: number;
   size: number; opacity: number;
+  phase: number; phaseSpeed: number;
   r: number; g: number; b: number;
 }
 
@@ -31,29 +26,27 @@ export function StarField() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Stars
-    const stars: Star[] = Array.from({ length: 220 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      size: Math.random() * 1.4 + 0.2,
-      opacity: Math.random() * 0.65 + 0.25,
-      speed: Math.random() * 0.018 + 0.004,
-      offset: Math.random() * Math.PI * 2,
-    }));
-
-    // Gold/white dust particles
-    const palette = [
-      [201, 168, 76], [240, 192, 64], [232, 213, 163], [255, 248, 200],
+    // Sunlight mote palette — warm whites, cream, pale gold, sky blue
+    const palette: [number, number, number][] = [
+      [255, 255, 255],
+      [255, 252, 220],
+      [255, 248, 200],
+      [240, 250, 255],
+      [220, 240, 255],
+      [255, 245, 180],
     ];
-    const dust: Dust[] = Array.from({ length: 70 }, () => {
+
+    const motes: Mote[] = Array.from({ length: 65 }, () => {
       const [r, g, b] = palette[Math.floor(Math.random() * palette.length)];
       return {
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.18,
-        size: Math.random() * 1.8 + 0.4,
-        opacity: Math.random() * 0.25 + 0.04,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: -(Math.random() * 0.22 + 0.04),   // drift upward
+        size: Math.random() * 2.8 + 0.6,
+        opacity: Math.random() * 0.32 + 0.06,
+        phase: Math.random() * Math.PI * 2,
+        phaseSpeed: Math.random() * 0.012 + 0.004,
         r, g, b,
       };
     });
@@ -63,27 +56,28 @@ export function StarField() {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw stars with twinkling
-      for (const s of stars) {
-        const tw = Math.sin(t * s.speed + s.offset) * 0.28 + 0.72;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 248, 215, ${s.opacity * tw})`;
-        ctx.fill();
-      }
+      for (const m of motes) {
+        // Drift
+        m.x += m.vx;
+        m.y += m.vy;
 
-      // Draw and drift dust
-      for (const d of dust) {
-        d.x += d.vx;
-        d.y += d.vy;
-        if (d.x < -2) d.x = canvas.width + 2;
-        if (d.x > canvas.width + 2) d.x = -2;
-        if (d.y < -2) d.y = canvas.height + 2;
-        if (d.y > canvas.height + 2) d.y = -2;
+        // Wrap around
+        if (m.y < -4) m.y = canvas.height + 4;
+        if (m.x < -4) m.x = canvas.width + 4;
+        if (m.x > canvas.width + 4) m.x = -4;
+
+        // Pulse opacity
+        const pulse = Math.sin(t * m.phaseSpeed + m.phase) * 0.18 + 0.82;
+        const alpha = m.opacity * pulse;
+
+        // Draw soft glowing mote
+        const grad = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.size * 2.2);
+        grad.addColorStop(0, `rgba(${m.r},${m.g},${m.b},${alpha})`);
+        grad.addColorStop(1, `rgba(${m.r},${m.g},${m.b},0)`);
 
         ctx.beginPath();
-        ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${d.r},${d.g},${d.b},${d.opacity})`;
+        ctx.arc(m.x, m.y, m.size * 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
         ctx.fill();
       }
 
@@ -101,7 +95,7 @@ export function StarField() {
   return (
     <canvas
       ref={canvasRef}
-      style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
+      style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', zIndex: 3, pointerEvents: 'none' }}
     />
   );
 }

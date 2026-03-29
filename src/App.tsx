@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { MediterraneanBg } from './components/MediterraneanBg';
 import { StarField } from './components/StarField';
 import { FloatingTags } from './components/FloatingTags';
 import { AudioWave } from './components/AudioWave';
@@ -55,7 +56,6 @@ export default function App() {
       const { base64, mimeType } = await resizeImage(imageFile);
       const res = await analyzePhoto(base64, mimeType);
       setResult(res);
-      // Save to history (thumbnail generated from current imageUrl)
       const thumb = await makeThumbnail(imageUrl);
       addHistoryItem(thumb, res);
     } catch (e) {
@@ -72,7 +72,6 @@ export default function App() {
     setError(null);
   };
 
-  // Load a history item into the result view
   const handleSelectHistory = (item: HistoryItem) => {
     setImageUrl(item.thumbnail);
     setResult(item.result);
@@ -81,11 +80,14 @@ export default function App() {
     setShowHistory(false);
   };
 
-  const gold = (a: number) => `rgba(201,168,76,${a})`;
+  const deep = (a: number) => `rgba(26,82,118,${a})`;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0f', position: 'relative' }}>
-      {/* Layer 0: stars */}
+    <div style={{ minHeight: '100vh', position: 'relative' }}>
+      {/* Layer 0-2: sky gradient, clouds, ocean waves */}
+      <MediterraneanBg />
+
+      {/* Layer 3: floating sunlight particles */}
       <StarField />
 
       {/* Music toggle (top-right) */}
@@ -100,22 +102,23 @@ export default function App() {
           display: 'flex', alignItems: 'center', gap: '0.35rem',
           padding: '0.45rem 0.85rem',
           borderRadius: '9999px',
-          background: 'rgba(10,10,15,0.7)',
-          border: `1px solid ${gold(0.22)}`,
-          color: gold(0.5),
+          background: 'rgba(255,252,245,0.72)',
+          border: `1px solid ${deep(0.22)}`,
+          color: deep(0.55),
           fontFamily: '"Noto Serif SC", serif',
           fontSize: '0.72rem', letterSpacing: '0.12em',
           cursor: 'pointer',
-          backdropFilter: 'blur(8px)',
+          backdropFilter: 'blur(10px)',
           transition: 'all 0.3s ease',
+          boxShadow: '0 2px 10px rgba(26,82,118,0.1)',
         }}
         onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.borderColor = gold(0.55);
-          (e.currentTarget as HTMLButtonElement).style.color = '#c9a84c';
+          (e.currentTarget as HTMLButtonElement).style.borderColor = deep(0.55);
+          (e.currentTarget as HTMLButtonElement).style.color = '#1a5276';
         }}
         onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.borderColor = gold(0.22);
-          (e.currentTarget as HTMLButtonElement).style.color = gold(0.5);
+          (e.currentTarget as HTMLButtonElement).style.borderColor = deep(0.22);
+          (e.currentTarget as HTMLButtonElement).style.color = deep(0.55);
         }}
       >
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
@@ -125,7 +128,7 @@ export default function App() {
         历史
       </button>
 
-      {/* Layer 1: floating tags */}
+      {/* Layer 4: floating tags */}
       {result && <FloatingTags tags={result.tags} />}
 
       {/* History panel */}
@@ -142,18 +145,19 @@ export default function App() {
         {/* Header */}
         <header style={{ textAlign: 'center', paddingTop: '4rem', paddingBottom: '2rem' }}>
           <h1 style={{
-            fontFamily: '"DM Serif Display", serif',
+            fontFamily: '"Playfair Display", "Cormorant Garamond", serif',
             fontSize: 'clamp(2.2rem, 6vw, 4rem)',
-            color: '#c9a84c',
+            color: '#1a5276',
             letterSpacing: '-0.02em',
             lineHeight: 1,
             marginBottom: '0.4rem',
+            textShadow: '0 2px 12px rgba(255,255,255,0.5)',
           }}>
             聆·境
           </h1>
           <p style={{
             fontFamily: '"Noto Serif SC", serif',
-            color: gold(0.48),
+            color: 'rgba(26,82,118,0.58)',
             fontSize: '0.8rem',
             letterSpacing: '0.5em',
             fontWeight: 300,
@@ -184,8 +188,9 @@ export default function App() {
                       alt="preview"
                       style={{
                         maxHeight: '220px', maxWidth: '100%',
-                        borderRadius: '12px', objectFit: 'cover',
-                        border: `1px solid ${gold(0.25)}`,
+                        borderRadius: '14px', objectFit: 'cover',
+                        border: `1px solid ${deep(0.2)}`,
+                        boxShadow: '0 4px 20px rgba(26,82,118,0.18)',
                         display: 'block', margin: '0 auto 1.25rem',
                       }}
                     />
@@ -201,7 +206,7 @@ export default function App() {
                     <div className="loading-ring" style={{ margin: '0 auto 1.5rem' }} />
                     <p className="pulse-text" style={{
                       fontFamily: '"Noto Serif SC", serif',
-                      color: gold(0.7),
+                      color: deep(0.75),
                       fontSize: '0.88rem',
                       letterSpacing: '0.22em',
                       marginBottom: '1.5rem',
@@ -216,7 +221,7 @@ export default function App() {
                 {error && (
                   <p style={{
                     textAlign: 'center',
-                    color: 'rgba(255,100,80,0.8)',
+                    color: 'rgba(180,50,40,0.85)',
                     fontFamily: '"Noto Serif SC", serif',
                     fontSize: '0.88rem',
                     letterSpacing: '0.05em',

@@ -15,7 +15,7 @@ const PIANO_EVENTS: PianoEvent[] = [
   { time: '0:0',   notes: 'A3',        dur: '4n' },
   { time: '0:1',   notes: 'C4',        dur: '4n' },
   { time: '0:2',   notes: 'E4',        dur: '4n' },
-  { time: '0:2:2', notes: 'A4',        dur: '8n' },  // sparkle
+  { time: '0:2:2', notes: 'A4',        dur: '8n' },
   { time: '0:3',   notes: 'C4',        dur: '4n' },
   // Bar 1 — F
   { time: '1:0',   notes: 'F3',        dur: '4n' },
@@ -26,7 +26,7 @@ const PIANO_EVENTS: PianoEvent[] = [
   { time: '2:0',   notes: 'C4',        dur: '4n' },
   { time: '2:1',   notes: 'E4',        dur: '4n' },
   { time: '2:2',   notes: 'G4',        dur: '4n' },
-  { time: '2:2:2', notes: 'C5',        dur: '8n' },  // sparkle
+  { time: '2:2:2', notes: 'C5',        dur: '8n' },
   { time: '2:3',   notes: 'E4',        dur: '4n' },
   // Bar 3 — G
   { time: '3:0',   notes: 'G3',        dur: '4n' },
@@ -48,26 +48,22 @@ export function MusicToggle() {
   const [isHovered, setIsHovered]   = useState(false);
   const initializedRef = useRef(false);
 
-  // Kick off everything the first time
   const initAudio = async () => {
     if (initializedRef.current) return;
     initializedRef.current = true;
 
     await Tone.start();
 
-    // FX chain
     const reverb = new Tone.Reverb({ decay: 6, wet: 0.6 }).toDestination();
     await reverb.ready;
     const delay = new Tone.FeedbackDelay({ delayTime: '8n', feedback: 0.18, wet: 0.12 }).connect(reverb);
 
-    // Piano synth
     const piano = new Tone.PolySynth(Tone.Synth, {
       oscillator: { type: 'triangle8' },
       envelope: { attack: 0.35, decay: 1.2, sustain: 0.25, release: 4 },
       volume: -13,
     }).connect(delay);
 
-    // Pad synth (soft FM pad)
     const pad = new Tone.PolySynth(Tone.FMSynth, {
       harmonicity: 0.5,
       modulationIndex: 1,
@@ -78,14 +74,12 @@ export function MusicToggle() {
       volume: -22,
     }).connect(reverb);
 
-    // Transport
     const transport = Tone.getTransport();
     transport.bpm.value = 56;
     transport.loop = true;
     transport.loopStart = '0:0';
     transport.loopEnd   = '4:0';
 
-    // Parts
     const pianoPart = new Tone.Part<PianoEvent>((time, ev) => {
       piano.triggerAttackRelease(ev.notes, ev.dur, time);
     }, PIANO_EVENTS);
@@ -100,7 +94,6 @@ export function MusicToggle() {
     setIsPlaying(true);
   };
 
-  // Toggle play / pause (after audio is set up)
   const toggle = async () => {
     if (!initializedRef.current) {
       await initAudio();
@@ -117,7 +110,6 @@ export function MusicToggle() {
     }
   };
 
-  // First interaction anywhere on the page starts music
   useEffect(() => {
     const handler = () => { if (!initializedRef.current) initAudio(); };
     document.addEventListener('click',      handler, { once: true });
@@ -129,12 +121,9 @@ export function MusicToggle() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => { try { Tone.getTransport().stop(); } catch { /* ignore */ } };
   }, []);
-
-  const gold = (a: number) => `rgba(201,168,76,${a})`;
 
   return (
     <button
@@ -150,27 +139,28 @@ export function MusicToggle() {
         width:          '38px',
         height:         '38px',
         borderRadius:   '50%',
-        background:     isHovered ? 'rgba(201,168,76,0.12)' : 'rgba(10,10,15,0.7)',
-        border:         `1px solid ${gold(isPlaying ? 0.55 : 0.22)}`,
-        color:          isPlaying ? '#c9a84c' : gold(0.38),
+        background:     isHovered
+          ? 'rgba(26,82,118,0.18)'
+          : 'rgba(255,252,245,0.72)',
+        border:         `1px solid ${isPlaying ? 'rgba(26,82,118,0.7)' : 'rgba(26,82,118,0.28)'}`,
+        color:          isPlaying ? '#1a5276' : 'rgba(26,82,118,0.5)',
         cursor:         'pointer',
         display:        'flex',
         alignItems:     'center',
         justifyContent: 'center',
-        backdropFilter: 'blur(8px)',
+        backdropFilter: 'blur(10px)',
         transition:     'all 0.3s ease',
         padding:        0,
         lineHeight:     1,
+        boxShadow:      '0 2px 10px rgba(26,82,118,0.12)',
       }}
     >
       {isPlaying ? (
-        // Pause icon
         <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
           <rect x="2" y="2" width="3.5" height="10" rx="1"/>
           <rect x="8.5" y="2" width="3.5" height="10" rx="1"/>
         </svg>
       ) : (
-        // Music note icon
         <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
           <path d="M5 10.5V3.5l7-1.5v7"/>
           <circle cx="3.5" cy="10.5" r="1.8"/>

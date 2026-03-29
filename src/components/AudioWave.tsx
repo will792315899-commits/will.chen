@@ -28,10 +28,11 @@ export function AudioWave({ active, height = 60 }: AudioWaveProps) {
     const w = () => canvas.offsetWidth;
     const h = () => canvas.offsetHeight;
 
+    // Mediterranean teal/blue waves
     const waves = [
-      { amp: 18, freq: 0.022, speed: 0.048, color: 'rgba(201,168,76,0.75)', phase: 0 },
-      { amp: 12, freq: 0.034, speed: 0.065, color: 'rgba(240,192,64,0.45)', phase: 1.2 },
-      { amp: 24, freq: 0.014, speed: 0.036, color: 'rgba(232,213,163,0.28)', phase: 2.5 },
+      { amp: 18, freq: 0.022, speed: 0.048, color: 'rgba(72,201,176,0.78)', phase: 0 },
+      { amp: 12, freq: 0.034, speed: 0.065, color: 'rgba(52,152,219,0.50)', phase: 1.2 },
+      { amp: 24, freq: 0.014, speed: 0.036, color: 'rgba(133,193,233,0.32)', phase: 2.5 },
     ];
 
     let t = 0;

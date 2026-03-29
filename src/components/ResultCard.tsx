@@ -28,7 +28,8 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
     }
   };
 
-  const gold = (a: number) => `rgba(201,168,76,${a})`;
+  const deep  = (a: number) => `rgba(26,82,118,${a})`;
+  const teal  = (a: number) => `rgba(72,201,176,${a})`;
 
   return (
     <>
@@ -37,23 +38,29 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
         <ShareCard ref={shareCardRef} result={result} imageUrl={imageUrl} />
       </div>
 
-      {/* ── Visible result card ───────────────────────────── */}
+      {/* ── Visible result card ── */}
       <div
         style={{
-          background: 'rgba(8,8,12,0.88)',
-          border: `1px solid ${gold(0.28)}`,
+          background: 'rgba(255,252,245,0.93)',
+          border: `1px solid ${deep(0.15)}`,
           borderRadius: '20px',
           padding: '2rem',
-          backdropFilter: 'blur(16px)',
-          boxShadow: `0 0 80px ${gold(0.08)}, 0 0 160px rgba(0,0,0,0.6)`,
+          backdropFilter: 'blur(18px)',
+          boxShadow: `0 8px 40px rgba(26,82,118,0.15), 0 2px 0 rgba(255,255,255,0.8) inset`,
           position: 'relative',
           overflow: 'hidden',
+          /* Subtle plaster texture */
+          backgroundImage: [
+            'radial-gradient(ellipse at 15% 20%, rgba(255,255,255,0.25) 0%, transparent 55%)',
+            'radial-gradient(ellipse at 85% 80%, rgba(200,220,240,0.15) 0%, transparent 50%)',
+            'radial-gradient(ellipse at 50% 50%, rgba(255,248,235,0.1) 0%, transparent 70%)',
+          ].join(', '),
         }}
       >
-        {/* Corner glow */}
+        {/* Sun-glow corner decoration */}
         <div style={{
-          position: 'absolute', top: 0, right: 0, width: '200px', height: '200px',
-          background: 'radial-gradient(circle at top right, rgba(201,168,76,0.07), transparent 70%)',
+          position: 'absolute', top: 0, right: 0, width: '180px', height: '180px',
+          background: 'radial-gradient(circle at top right, rgba(93,173,226,0.10), transparent 70%)',
           pointerEvents: 'none',
         }} />
 
@@ -65,7 +72,9 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
               alt="uploaded"
               style={{
                 width: '108px', height: '108px', objectFit: 'cover',
-                borderRadius: '10px', border: `1px solid ${gold(0.25)}`,
+                borderRadius: '12px',
+                border: `1px solid ${deep(0.18)}`,
+                boxShadow: '0 3px 12px rgba(26,82,118,0.15)',
               }}
             />
           </div>
@@ -73,34 +82,38 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
               <span style={{
                 padding: '0.2rem 0.75rem', borderRadius: '9999px', fontSize: '0.72rem',
-                background: gold(0.14), border: `1px solid ${gold(0.4)}`,
-                color: '#c9a84c', fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.08em',
+                background: deep(0.1), border: `1px solid ${deep(0.32)}`,
+                color: '#1a5276', fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.08em',
               }}>{result.mood}</span>
               <span style={{
                 padding: '0.2rem 0.75rem', borderRadius: '9999px', fontSize: '0.72rem',
-                background: gold(0.06), border: `1px solid ${gold(0.2)}`,
-                color: gold(0.65), fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.05em',
+                background: teal(0.08), border: `1px solid ${teal(0.3)}`,
+                color: 'rgba(40,150,130,0.85)', fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.05em',
               }}>{result.atmosphere}</span>
             </div>
             <h2 style={{
-              fontFamily: '"DM Serif Display", serif',
+              fontFamily: '"Playfair Display", "Cormorant Garamond", serif',
               fontSize: 'clamp(1.3rem, 4vw, 1.75rem)',
-              color: '#e8d5a3', letterSpacing: '-0.01em', lineHeight: 1.2, marginBottom: '0.4rem',
+              color: '#2c3e50', letterSpacing: '-0.01em', lineHeight: 1.2, marginBottom: '0.4rem',
             }}>{result.song}</h2>
             <p style={{
-              fontFamily: '"Noto Serif SC", serif', color: gold(0.65),
+              fontFamily: '"Noto Serif SC", serif', color: deep(0.6),
               fontSize: '0.85rem', letterSpacing: '0.12em',
             }}>{result.artist}</p>
           </div>
         </div>
 
         {/* Divider */}
-        <div style={{ height: '1px', background: `linear-gradient(to right, transparent, ${gold(0.25)}, transparent)`, marginBottom: '1.5rem' }} />
+        <div style={{
+          height: '1px',
+          background: `linear-gradient(to right, transparent, ${deep(0.2)}, transparent)`,
+          marginBottom: '1.5rem',
+        }} />
 
         {/* Poetic reason */}
         <blockquote style={{
           fontFamily: '"Noto Serif SC", serif', fontStyle: 'italic',
-          color: 'rgba(232,213,163,0.82)', fontSize: '0.95rem',
+          color: 'rgba(44,62,80,0.78)', fontSize: '0.95rem',
           lineHeight: 1.9, letterSpacing: '0.06em',
           textAlign: 'center', marginBottom: '1.5rem', padding: '0 0.5rem',
         }}>
@@ -112,8 +125,8 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
           {result.tags.map((tag) => (
             <span key={tag} style={{
               padding: '0.22rem 0.7rem', borderRadius: '6px', fontSize: '0.72rem',
-              background: gold(0.06), border: `1px solid ${gold(0.18)}`,
-              color: gold(0.6), fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.08em',
+              background: deep(0.06), border: `1px solid ${deep(0.16)}`,
+              color: deep(0.65), fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.08em',
             }}>{tag}</span>
           ))}
         </div>
@@ -121,9 +134,8 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
         {/* Wave */}
         <AudioWave active={true} height={50} />
 
-        {/* ── Save buttons ─────────────────────────────── */}
+        {/* ── Save buttons ── */}
         <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.25rem' }}>
-          {/* Save as image (WeChat share card) */}
           <button
             onClick={() => handleSave('share')}
             disabled={saving}
@@ -131,13 +143,14 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
               flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem',
               padding: '0.58rem 0',
               borderRadius: '9999px',
-              background: saving ? gold(0.05) : gold(0.1),
-              border: `1px solid ${gold(saving ? 0.2 : 0.5)}`,
-              color: saving ? gold(0.35) : '#c9a84c',
+              background: saving ? deep(0.04) : '#1a5276',
+              border: `1px solid ${saving ? deep(0.15) : '#1a5276'}`,
+              color: saving ? deep(0.35) : '#ffffff',
               fontFamily: '"Noto Serif SC", serif',
               fontSize: '0.76rem', letterSpacing: '0.08em',
               cursor: saving ? 'not-allowed' : 'pointer',
               transition: 'all 0.25s',
+              boxShadow: saving ? 'none' : '0 3px 10px rgba(26,82,118,0.3)',
             }}
           >
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
@@ -147,7 +160,6 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
             {saving ? '生成中…' : '保存为图片'}
           </button>
 
-          {/* Save to album */}
           <button
             onClick={() => handleSave('album')}
             disabled={saving}
@@ -155,9 +167,9 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
               flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem',
               padding: '0.58rem 0',
               borderRadius: '9999px',
-              background: saving ? gold(0.03) : gold(0.06),
-              border: `1px solid ${gold(saving ? 0.12 : 0.32)}`,
-              color: saving ? gold(0.25) : gold(0.72),
+              background: 'rgba(255,252,245,0.9)',
+              border: `1px solid ${saving ? deep(0.15) : deep(0.45)}`,
+              color: saving ? deep(0.3) : '#1a5276',
               fontFamily: '"Noto Serif SC", serif',
               fontSize: '0.76rem', letterSpacing: '0.08em',
               cursor: saving ? 'not-allowed' : 'pointer',
@@ -173,7 +185,7 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
           </button>
         </div>
 
-        {/* ── Streaming buttons ─────────────────────────── */}
+        {/* ── Streaming buttons ── */}
         <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.65rem' }}>
           <a
             href={`https://open.spotify.com/search/${encodeURIComponent(`${result.song} ${result.artist}`)}`}
@@ -182,10 +194,10 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
               flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
               padding: '0.6rem 0', borderRadius: '9999px',
               background: 'rgba(30,215,96,0.08)', border: '1px solid rgba(30,215,96,0.35)',
-              color: 'rgba(30,215,96,0.85)', fontFamily: '"Noto Serif SC", serif',
+              color: 'rgba(24,160,72,0.9)', fontFamily: '"Noto Serif SC", serif',
               fontSize: '0.78rem', letterSpacing: '0.08em', textDecoration: 'none', transition: 'all 0.25s ease',
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(30,215,96,0.15)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(30,215,96,0.7)'; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(30,215,96,0.15)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(30,215,96,0.65)'; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(30,215,96,0.08)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(30,215,96,0.35)'; }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -199,12 +211,12 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
             style={{
               flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
               padding: '0.6rem 0', borderRadius: '9999px',
-              background: 'rgba(252,60,68,0.08)', border: '1px solid rgba(252,60,68,0.32)',
-              color: 'rgba(252,100,100,0.85)', fontFamily: '"Noto Serif SC", serif',
+              background: 'rgba(252,60,68,0.07)', border: '1px solid rgba(252,60,68,0.28)',
+              color: 'rgba(210,50,58,0.88)', fontFamily: '"Noto Serif SC", serif',
               fontSize: '0.78rem', letterSpacing: '0.08em', textDecoration: 'none', transition: 'all 0.25s ease',
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(252,60,68,0.15)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(252,60,68,0.65)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(252,60,68,0.08)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(252,60,68,0.32)'; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(252,60,68,0.14)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(252,60,68,0.6)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(252,60,68,0.07)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(252,60,68,0.28)'; }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
               <path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208c-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.726.172 1.439.487 2.112.48 1.021 1.258 1.75 2.276 2.252.6.293 1.246.403 1.903.454a16.146 16.146 0 001.562.15c.04.003.083.01.124.013H18.01c.14-.01.282-.017.423-.027.76-.05 1.497-.176 2.188-.487 1.293-.57 2.159-1.504 2.64-2.835.16-.448.25-.912.296-1.382.044-.43.065-.862.065-1.293V6.124zm-8.06 1.128l-5.07 2.99v5.78c0 .642-.52 1.162-1.162 1.162s-1.163-.52-1.163-1.163V8.138c0-.414.22-.798.578-1.007l6.234-3.675c.643-.379 1.46-.165 1.839.478.38.643.165 1.46-.479 1.839l-.777.479z"/>

@@ -7,8 +7,8 @@
 }
 
 body {
-  background: #0a0a0f;
-  color: #e8d5a3;
+  background: #5dade2;
+  color: #3d2b1f;
   font-family: "Noto Serif SC", serif;
   overflow-x: hidden;
 }
@@ -57,8 +57,8 @@ body {
 .loading-ring {
   width: 48px;
   height: 48px;
-  border: 2px solid rgba(201, 168, 76, 0.2);
-  border-top-color: #c9a84c;
+  border: 2px solid rgba(26, 82, 118, 0.2);
+  border-top-color: #1a5276;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
@@ -76,11 +76,11 @@ body {
   animation: pulse-text 2s ease-in-out infinite;
 }
 
-/* ── Glow on hover for button ── */
+/* ── Primary button (deep Mediterranean blue) ── */
 .btn-gold {
-  background: linear-gradient(135deg, rgba(201, 168, 76, 0.18), rgba(201, 168, 76, 0.08));
-  border: 1px solid rgba(201, 168, 76, 0.55);
-  color: #c9a84c;
+  background: #1a5276;
+  border: none;
+  color: #ffffff;
   font-family: "Noto Serif SC", serif;
   font-size: 0.95rem;
   letter-spacing: 0.18em;
@@ -88,18 +88,20 @@ body {
   border-radius: 9999px;
   padding: 0.7rem 2.2rem;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(26, 82, 118, 0.35);
 }
 
 .btn-gold:hover {
-  background: linear-gradient(135deg, rgba(201, 168, 76, 0.28), rgba(201, 168, 76, 0.14));
-  border-color: rgba(201, 168, 76, 0.9);
-  box-shadow: 0 0 24px rgba(201, 168, 76, 0.2);
+  background: #1f618d;
+  box-shadow: 0 4px 24px rgba(26, 82, 118, 0.55), 0 0 18px rgba(93, 173, 226, 0.35);
+  transform: translateY(-1px);
 }
 
+/* ── Ghost / secondary button ── */
 .btn-ghost {
   background: none;
   border: none;
-  color: rgba(201, 168, 76, 0.5);
+  color: rgba(26, 82, 118, 0.55);
   font-family: "Noto Serif SC", serif;
   font-size: 0.85rem;
   letter-spacing: 0.12em;
@@ -108,10 +110,79 @@ body {
 }
 
 .btn-ghost:hover {
-  color: #c9a84c;
+  color: #1a5276;
 }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #0a0a0f; }
-::-webkit-scrollbar-thumb { background: rgba(201, 168, 76, 0.3); border-radius: 2px; }
+::-webkit-scrollbar-track { background: #d4e6f1; }
+::-webkit-scrollbar-thumb { background: rgba(26, 82, 118, 0.3); border-radius: 2px; }
+
+/* ── Mediterranean clouds ── */
+.med-cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 50px;
+  filter: blur(2px);
+}
+.med-cloud::before,
+.med-cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 50%;
+}
+
+@keyframes cloud-drift {
+  from { transform: translateX(-320px); }
+  to   { transform: translateX(calc(100vw + 320px)); }
+}
+
+.med-cloud-1 {
+  width: 180px; height: 36px;
+  top: 10%;
+  animation: cloud-drift 55s linear infinite;
+  animation-delay: -18s;
+}
+.med-cloud-1::before { width: 70px; height: 56px; top: -28px; left: 28px; }
+.med-cloud-1::after  { width: 52px; height: 44px; top: -18px; left: 88px; }
+
+.med-cloud-2 {
+  width: 230px; height: 44px;
+  top: 20%;
+  animation: cloud-drift 70s linear infinite;
+  animation-delay: -35s;
+}
+.med-cloud-2::before { width: 92px; height: 72px; top: -36px; left: 42px; }
+.med-cloud-2::after  { width: 68px; height: 54px; top: -24px; left: 118px; }
+
+.med-cloud-3 {
+  width: 155px; height: 30px;
+  top: 7%;
+  animation: cloud-drift 42s linear infinite;
+  animation-delay: -6s;
+}
+.med-cloud-3::before { width: 62px; height: 50px; top: -25px; left: 22px; }
+.med-cloud-3::after  { width: 46px; height: 38px; top: -16px; left: 72px; }
+
+.med-cloud-4 {
+  width: 200px; height: 40px;
+  top: 28%;
+  animation: cloud-drift 80s linear infinite;
+  animation-delay: -50s;
+}
+.med-cloud-4::before { width: 80px; height: 64px; top: -32px; left: 36px; }
+.med-cloud-4::after  { width: 62px; height: 50px; top: -22px; left: 102px; }
+
+/* ── Ocean wave animation ── */
+@keyframes wave-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.med-wave-1 {
+  animation: wave-drift 18s linear infinite;
+}
+.med-wave-2 {
+  animation: wave-drift 26s linear infinite;
+}

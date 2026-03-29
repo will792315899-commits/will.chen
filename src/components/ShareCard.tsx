@@ -7,43 +7,44 @@ interface ShareCardProps {
 }
 
 /**
- * A visually designed card intended for html2canvas capture.
+ * Mediterranean-styled share card for html2canvas capture.
  * Rendered off-screen; captured on demand.
  * Avoid backdrop-filter / box-shadow (html2canvas support is limited).
  */
 export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ result, imageUrl }, ref) => {
-  const gold = (a: number) => `rgba(201,168,76,${a})`;
+  const deep = (a: number) => `rgba(26,82,118,${a})`;
+  const teal = (a: number) => `rgba(72,201,176,${a})`;
 
   return (
     <div
       ref={ref}
       style={{
         width: '375px',
-        background: '#0a0a0f',
+        background: '#f5f0e8',
         overflow: 'hidden',
         fontFamily: '"Noto Serif SC", serif',
       }}
     >
-      {/* ── Photo section ─────────────────────────────────── */}
+      {/* ── Photo section ── */}
       <div style={{ position: 'relative', width: '375px', height: '375px', overflow: 'hidden' }}>
         <img
           src={imageUrl}
           alt=""
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
-        {/* Bottom gradient fade */}
+        {/* Subtle gradient fade at bottom */}
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'linear-gradient(to bottom, transparent 55%, rgba(10,10,15,0.97) 100%)',
+          background: 'linear-gradient(to bottom, transparent 55%, rgba(245,240,232,0.97) 100%)',
         }} />
-        {/* Mood badge overlaid on photo */}
+        {/* Mood badge */}
         <div style={{
           position: 'absolute', top: '14px', left: '14px',
           padding: '4px 12px',
           borderRadius: '9999px',
-          background: 'rgba(10,10,15,0.7)',
-          border: `1px solid ${gold(0.45)}`,
-          color: '#c9a84c',
+          background: 'rgba(255,252,245,0.88)',
+          border: `1px solid ${deep(0.4)}`,
+          color: '#1a5276',
           fontSize: '12px',
           letterSpacing: '0.12em',
         }}>
@@ -51,15 +52,15 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ result, i
         </div>
       </div>
 
-      {/* ── Content section ───────────────────────────────── */}
-      <div style={{ padding: '20px 24px 0' }}>
+      {/* ── Content section ── */}
+      <div style={{ padding: '20px 24px 0', background: '#f5f0e8' }}>
         {/* Song title */}
         <div style={{
-          fontFamily: '"DM Serif Display", serif',
-          fontSize: '30px',
-          color: '#e8d5a3',
-          letterSpacing: '-0.02em',
-          lineHeight: 1.15,
+          fontFamily: '"Playfair Display", "Cormorant Garamond", serif',
+          fontSize: '28px',
+          color: '#1a3a52',
+          letterSpacing: '-0.01em',
+          lineHeight: 1.2,
           marginBottom: '6px',
         }}>
           {result.song}
@@ -67,7 +68,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ result, i
 
         {/* Artist */}
         <div style={{
-          color: gold(0.62),
+          color: deep(0.62),
           fontSize: '13px',
           letterSpacing: '0.14em',
           marginBottom: '18px',
@@ -80,9 +81,9 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ result, i
           <span style={{
             padding: '3px 10px',
             borderRadius: '9999px',
-            background: gold(0.07),
-            border: `1px solid ${gold(0.2)}`,
-            color: gold(0.55),
+            background: teal(0.1),
+            border: `1px solid ${teal(0.35)}`,
+            color: 'rgba(40,150,130,0.85)',
             fontSize: '11px',
             letterSpacing: '0.08em',
           }}>
@@ -93,14 +94,14 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ result, i
         {/* Divider */}
         <div style={{
           height: '1px',
-          background: `linear-gradient(to right, transparent, ${gold(0.3)}, transparent)`,
+          background: `linear-gradient(to right, transparent, ${deep(0.25)}, transparent)`,
           marginBottom: '18px',
         }} />
 
         {/* Reason */}
         <div style={{
           fontStyle: 'italic',
-          color: 'rgba(232,213,163,0.82)',
+          color: 'rgba(44,62,80,0.8)',
           fontSize: '14px',
           lineHeight: 1.9,
           letterSpacing: '0.06em',
@@ -120,9 +121,9 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ result, i
             <span key={tag} style={{
               padding: '3px 9px',
               borderRadius: '4px',
-              background: gold(0.06),
-              border: `1px solid ${gold(0.17)}`,
-              color: gold(0.55),
+              background: deep(0.07),
+              border: `1px solid ${deep(0.18)}`,
+              color: deep(0.6),
               fontSize: '11px',
               letterSpacing: '0.08em',
             }}>
@@ -134,19 +135,20 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ result, i
         {/* Divider */}
         <div style={{
           height: '1px',
-          background: `linear-gradient(to right, transparent, ${gold(0.18)}, transparent)`,
+          background: `linear-gradient(to right, transparent, ${deep(0.15)}, transparent)`,
           marginBottom: '16px',
         }} />
       </div>
 
-      {/* ── Watermark ─────────────────────────────────────── */}
+      {/* ── Watermark ── */}
       <div style={{
         padding: '0 24px 20px',
         textAlign: 'center',
-        color: gold(0.3),
+        color: deep(0.32),
         fontSize: '11px',
         letterSpacing: '0.35em',
         fontFamily: '"Noto Serif SC", serif',
+        background: '#f5f0e8',
       }}>
         聆·境 — 照片调音师
       </div>
