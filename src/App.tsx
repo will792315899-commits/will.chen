@@ -5,7 +5,9 @@ import { AudioWave } from './components/AudioWave';
 import { PhotoUploader } from './components/PhotoUploader';
 import { ResultCard } from './components/ResultCard';
 import { MusicToggle } from './components/MusicToggle';
+import { HistoryPanel } from './components/HistoryPanel';
 import { analyzePhoto } from './api/anthropic';
+import { addHistoryItem, makeThumbnail, type HistoryItem } from './utils/history';
 import type { AnalysisResult } from './types';
 
 function resizeImage(file: File): Promise<{ base64: string; mimeType: string }> {
@@ -31,11 +33,12 @@ function resizeImage(file: File): Promise<{ base64: string; mimeType: string }> 
 }
 
 export default function App() {
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [result, setResult] = useState<AnalysisResult | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [imageFile, setImageFile]   = useState<File | null>(null);
+  const [imageUrl, setImageUrl]     = useState<string | null>(null);
+  const [result, setResult]         = useState<AnalysisResult | null>(null);
+  const [loading, setLoading]       = useState(false);
+  const [error, setError]           = useState<string | null>(null);
+  const [showHistory, setShowHistory] = useState(false);
 
   const handleUpload = useCallback((file: File) => {
     setImageFile(file);
@@ -45,13 +48,16 @@ export default function App() {
   }, []);
 
   const handleAnalyze = async () => {
-    if (!imageFile) return;
+    if (!imageFile || !imageUrl) return;
     setLoading(true);
     setError(null);
     try {
       const { base64, mimeType } = await resizeImage(imageFile);
       const res = await analyzePhoto(base64, mimeType);
       setResult(res);
+      // Save to history (thumbnail generated from current imageUrl)
+      const thumb = await makeThumbnail(imageUrl);
+      addHistoryItem(thumb, res);
     } catch (e) {
       setError(e instanceof Error ? e.message : '分析失败，请重试');
     } finally {
@@ -66,16 +72,69 @@ export default function App() {
     setError(null);
   };
 
+  // Load a history item into the result view
+  const handleSelectHistory = (item: HistoryItem) => {
+    setImageUrl(item.thumbnail);
+    setResult(item.result);
+    setImageFile(null);
+    setError(null);
+    setShowHistory(false);
+  };
+
+  const gold = (a: number) => `rgba(201,168,76,${a})`;
+
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0f', position: 'relative' }}>
       {/* Layer 0: stars */}
       <StarField />
 
-      {/* Music toggle button (top-right) */}
+      {/* Music toggle (top-right) */}
       <MusicToggle />
+
+      {/* History button (top-left) */}
+      <button
+        onClick={() => setShowHistory(true)}
+        title="历史记录"
+        style={{
+          position: 'fixed', top: '1.1rem', left: '1.1rem', zIndex: 50,
+          display: 'flex', alignItems: 'center', gap: '0.35rem',
+          padding: '0.45rem 0.85rem',
+          borderRadius: '9999px',
+          background: 'rgba(10,10,15,0.7)',
+          border: `1px solid ${gold(0.22)}`,
+          color: gold(0.5),
+          fontFamily: '"Noto Serif SC", serif',
+          fontSize: '0.72rem', letterSpacing: '0.12em',
+          cursor: 'pointer',
+          backdropFilter: 'blur(8px)',
+          transition: 'all 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.borderColor = gold(0.55);
+          (e.currentTarget as HTMLButtonElement).style.color = '#c9a84c';
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.borderColor = gold(0.22);
+          (e.currentTarget as HTMLButtonElement).style.color = gold(0.5);
+        }}
+      >
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+          <circle cx="6" cy="6" r="5"/>
+          <path d="M6 3v3.5l2 1.2"/>
+        </svg>
+        历史
+      </button>
 
       {/* Layer 1: floating tags */}
       {result && <FloatingTags tags={result.tags} />}
+
+      {/* History panel */}
+      {showHistory && (
+        <HistoryPanel
+          onClose={() => setShowHistory(false)}
+          onSelect={handleSelectHistory}
+        />
+      )}
 
       {/* Layer 10: main UI */}
       <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -94,7 +153,7 @@ export default function App() {
           </h1>
           <p style={{
             fontFamily: '"Noto Serif SC", serif',
-            color: 'rgba(201,168,76,0.48)',
+            color: gold(0.48),
             fontSize: '0.8rem',
             letterSpacing: '0.5em',
             fontWeight: 300,
@@ -104,10 +163,7 @@ export default function App() {
         </header>
 
         {/* Main content */}
-        <main style={{
-          flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          padding: '0 1rem 5rem',
-        }}>
+        <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 1rem 5rem' }}>
           <div style={{ width: '100%', maxWidth: '440px' }}>
 
             {/* ── Result state ── */}
@@ -129,8 +185,7 @@ export default function App() {
                       style={{
                         maxHeight: '220px', maxWidth: '100%',
                         borderRadius: '12px', objectFit: 'cover',
-                        border: '1px solid rgba(201,168,76,0.25)',
-                        marginBottom: '1.25rem',
+                        border: `1px solid ${gold(0.25)}`,
                         display: 'block', margin: '0 auto 1.25rem',
                       }}
                     />
@@ -146,7 +201,7 @@ export default function App() {
                     <div className="loading-ring" style={{ margin: '0 auto 1.5rem' }} />
                     <p className="pulse-text" style={{
                       fontFamily: '"Noto Serif SC", serif',
-                      color: 'rgba(201,168,76,0.7)',
+                      color: gold(0.7),
                       fontSize: '0.88rem',
                       letterSpacing: '0.22em',
                       marginBottom: '1.5rem',
