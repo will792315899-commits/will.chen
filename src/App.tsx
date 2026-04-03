@@ -147,17 +147,17 @@ export default function App() {
           <h1 style={{
             fontFamily: '"Playfair Display", "Cormorant Garamond", serif',
             fontSize: 'clamp(2.2rem, 6vw, 4rem)',
-            color: '#1a5276',
+            color: '#1a3c5e',
             letterSpacing: '-0.02em',
             lineHeight: 1,
             marginBottom: '0.4rem',
-            textShadow: '0 2px 12px rgba(255,255,255,0.5)',
+            textShadow: '2px 3px 10px rgba(255,190,80,0.25), 0 1px 0 rgba(255,255,255,0.45)',
           }}>
             聆·境
           </h1>
           <p style={{
             fontFamily: '"Noto Serif SC", serif',
-            color: 'rgba(26,82,118,0.58)',
+            color: '#c0846d',
             fontSize: '0.8rem',
             letterSpacing: '0.5em',
             fontWeight: 300,

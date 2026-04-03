@@ -29,7 +29,6 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
   };
 
   const deep  = (a: number) => `rgba(26,82,118,${a})`;
-  const teal  = (a: number) => `rgba(72,201,176,${a})`;
 
   return (
     <>
@@ -41,19 +40,17 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
       {/* ── Visible result card ── */}
       <div
         style={{
-          background: 'rgba(255,252,245,0.93)',
-          border: `1px solid ${deep(0.15)}`,
-          borderRadius: '20px',
+          background: 'rgba(253,246,227,0.92)',
+          border: '1px solid #c0846d',
+          borderRadius: '20px 17px 19px 18px / 18px 20px 17px 21px',
           padding: '2rem',
           backdropFilter: 'blur(18px)',
-          boxShadow: `0 8px 40px rgba(26,82,118,0.15), 0 2px 0 rgba(255,255,255,0.8) inset`,
+          boxShadow: '0 12px 48px rgba(0,0,0,0.25), 0 4px 14px rgba(192,132,109,0.28), inset 0 1px 0 rgba(255,255,255,0.55)',
           position: 'relative',
           overflow: 'hidden',
-          /* Subtle plaster texture */
           backgroundImage: [
-            'radial-gradient(ellipse at 15% 20%, rgba(255,255,255,0.25) 0%, transparent 55%)',
-            'radial-gradient(ellipse at 85% 80%, rgba(200,220,240,0.15) 0%, transparent 50%)',
-            'radial-gradient(ellipse at 50% 50%, rgba(255,248,235,0.1) 0%, transparent 70%)',
+            'radial-gradient(ellipse at 15% 20%, rgba(255,255,255,0.22) 0%, transparent 55%)',
+            'radial-gradient(ellipse at 85% 80%, rgba(220,180,150,0.10) 0%, transparent 50%)',
           ].join(', '),
         }}
       >
@@ -82,13 +79,13 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
               <span style={{
                 padding: '0.2rem 0.75rem', borderRadius: '9999px', fontSize: '0.72rem',
-                background: deep(0.1), border: `1px solid ${deep(0.32)}`,
-                color: '#1a5276', fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.08em',
+                background: 'rgba(192,132,109,0.12)', border: '1px solid rgba(192,132,109,0.45)',
+                color: '#9b5e45', fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.08em',
               }}>{result.mood}</span>
               <span style={{
                 padding: '0.2rem 0.75rem', borderRadius: '9999px', fontSize: '0.72rem',
-                background: teal(0.08), border: `1px solid ${teal(0.3)}`,
-                color: 'rgba(40,150,130,0.85)', fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.05em',
+                background: 'rgba(26,60,94,0.08)', border: '1px solid rgba(26,60,94,0.28)',
+                color: '#1a3c5e', fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.05em',
               }}>{result.atmosphere}</span>
             </div>
             <h2 style={{
@@ -125,8 +122,8 @@ export function ResultCard({ result, imageUrl, onReset }: ResultCardProps) {
           {result.tags.map((tag) => (
             <span key={tag} style={{
               padding: '0.22rem 0.7rem', borderRadius: '6px', fontSize: '0.72rem',
-              background: deep(0.06), border: `1px solid ${deep(0.16)}`,
-              color: deep(0.65), fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.08em',
+              background: 'rgba(192,132,109,0.08)', border: '1px solid rgba(192,132,109,0.30)',
+              color: '#9b5e45', fontFamily: '"Noto Serif SC", serif', letterSpacing: '0.08em',
             }}>{tag}</span>
           ))}
         </div>

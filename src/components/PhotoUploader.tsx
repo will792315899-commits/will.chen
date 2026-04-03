@@ -21,23 +21,25 @@ export function PhotoUploader({ onUpload }: PhotoUploaderProps) {
       onDragLeave={() => setDragging(false)}
       onDrop={(e) => { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files[0]; if (f) handleFile(f); }}
       style={{
-        border: `1.5px dashed ${dragging ? deep(0.8) : deep(0.32)}`,
-        borderRadius: '18px',
+        border: dragging
+          ? '1.5px solid #c0846d'
+          : '1.5px dashed #c0846d',
+        /* Slightly irregular corners for aged-wall feel */
+        borderRadius: '20px 17px 19px 18px / 18px 20px 17px 21px',
         padding: '3rem 2rem',
         textAlign: 'center',
         cursor: 'pointer',
         background: dragging
-          ? 'rgba(255,252,245,0.88)'
-          : 'rgba(255,252,245,0.72)',
+          ? 'rgba(253,246,227,0.95)'
+          : 'rgba(253,246,227,0.85)',
         transition: 'all 0.3s ease',
-        backdropFilter: 'blur(12px)',
+        backdropFilter: 'blur(14px)',
         boxShadow: dragging
-          ? `0 8px 32px ${deep(0.2)}, inset 0 1px 0 rgba(255,255,255,0.6)`
-          : `0 4px 20px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6)`,
-        /* Subtle wall-plaster texture via layered gradients */
-        backgroundImage: dragging ? undefined : [
-          'radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.18) 0%, transparent 60%)',
-          'radial-gradient(ellipse at 80% 70%, rgba(200,220,240,0.12) 0%, transparent 50%)',
+          ? '0 12px 40px rgba(0,0,0,0.28), 0 4px 12px rgba(192,132,109,0.35), inset 0 1px 0 rgba(255,255,255,0.5)'
+          : '0 8px 30px rgba(0,0,0,0.22), 0 3px 10px rgba(192,132,109,0.25), inset 0 1px 0 rgba(255,255,255,0.5)',
+        backgroundImage: [
+          'radial-gradient(ellipse at 18% 25%, rgba(255,255,255,0.22) 0%, transparent 55%)',
+          'radial-gradient(ellipse at 82% 75%, rgba(220,180,150,0.10) 0%, transparent 50%)',
         ].join(', '),
       }}
     >
