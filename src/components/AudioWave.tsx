@@ -28,18 +28,17 @@ export function AudioWave({ active, height = 60 }: AudioWaveProps) {
     const w = () => canvas.offsetWidth;
     const h = () => canvas.offsetHeight;
 
-    // Mediterranean teal/blue waves
+    // Warm amber / dark-cinema wave palette
     const waves = [
-      { amp: 18, freq: 0.022, speed: 0.048, color: 'rgba(72,201,176,0.78)', phase: 0 },
-      { amp: 12, freq: 0.034, speed: 0.065, color: 'rgba(52,152,219,0.50)', phase: 1.2 },
-      { amp: 24, freq: 0.014, speed: 0.036, color: 'rgba(133,193,233,0.32)', phase: 2.5 },
+      { amp: 14, freq: 0.022, speed: 0.042, color: 'rgba(200,160,80,0.55)',  phase: 0 },
+      { amp: 9,  freq: 0.036, speed: 0.060, color: 'rgba(180,130,60,0.32)',  phase: 1.4 },
+      { amp: 19, freq: 0.014, speed: 0.030, color: 'rgba(245,220,150,0.18)', phase: 2.8 },
     ];
 
     let t = 0;
     const draw = () => {
       ctx.clearRect(0, 0, w(), h());
-      const isActive = activeRef.current;
-      const scale = isActive ? 1 : 0.28;
+      const scale = activeRef.current ? 1 : 0.22;
 
       for (const wave of waves) {
         ctx.beginPath();
@@ -53,7 +52,7 @@ export function AudioWave({ active, height = 60 }: AudioWaveProps) {
           else ctx.lineTo(x, y);
         }
         ctx.strokeStyle = wave.color;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1.2;
         ctx.stroke();
       }
 

@@ -80,14 +80,12 @@ export default function App() {
     setShowHistory(false);
   };
 
-  const deep = (a: number) => `rgba(26,82,118,${a})`;
-
   return (
     <div style={{ minHeight: '100vh', position: 'relative' }}>
-      {/* Layer 0-2: sky gradient, clouds, ocean waves */}
+      {/* Background layers */}
       <MediterraneanBg />
 
-      {/* Layer 3: floating sunlight particles */}
+      {/* Floating particles */}
       <StarField />
 
       {/* Music toggle (top-right) */}
@@ -100,35 +98,33 @@ export default function App() {
         style={{
           position: 'fixed', top: '1.1rem', left: '1.1rem', zIndex: 50,
           display: 'flex', alignItems: 'center', gap: '0.35rem',
-          padding: '0.45rem 0.85rem',
-          borderRadius: '9999px',
-          background: 'rgba(255,252,245,0.72)',
-          border: `1px solid ${deep(0.22)}`,
-          color: deep(0.55),
-          fontFamily: '"Noto Serif SC", serif',
-          fontSize: '0.72rem', letterSpacing: '0.12em',
+          padding: '0', width: '38px', height: '38px',
+          borderRadius: '50%',
+          background: 'rgba(245,240,232,0.08)',
+          border: '1px solid rgba(245,240,232,0.18)',
+          color: 'rgba(245,240,232,0.5)',
           cursor: 'pointer',
           backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
           transition: 'all 0.3s ease',
-          boxShadow: '0 2px 10px rgba(26,82,118,0.1)',
+          justifyContent: 'center',
         }}
         onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.borderColor = deep(0.55);
-          (e.currentTarget as HTMLButtonElement).style.color = '#1a5276';
+          (e.currentTarget as HTMLButtonElement).style.background = 'rgba(245,240,232,0.14)';
+          (e.currentTarget as HTMLButtonElement).style.color = 'rgba(245,240,232,0.85)';
         }}
         onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.borderColor = deep(0.22);
-          (e.currentTarget as HTMLButtonElement).style.color = deep(0.55);
+          (e.currentTarget as HTMLButtonElement).style.background = 'rgba(245,240,232,0.08)';
+          (e.currentTarget as HTMLButtonElement).style.color = 'rgba(245,240,232,0.5)';
         }}
       >
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
-          <circle cx="6" cy="6" r="5"/>
-          <path d="M6 3v3.5l2 1.2"/>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round">
+          <circle cx="7" cy="7" r="5.5"/>
+          <path d="M7 4v3.2l2 1.3"/>
         </svg>
-        历史
       </button>
 
-      {/* Layer 4: floating tags */}
+      {/* Floating tags */}
       {result && <FloatingTags tags={result.tags} />}
 
       {/* History panel */}
@@ -139,35 +135,56 @@ export default function App() {
         />
       )}
 
-      {/* Layer 10: main UI */}
+      {/* Main UI */}
       <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 
         {/* Header */}
-        <header style={{ textAlign: 'center', paddingTop: '4rem', paddingBottom: '2rem' }}>
-          <h1 style={{
-            fontFamily: '"Playfair Display", "Cormorant Garamond", serif',
-            fontSize: 'clamp(2.2rem, 6vw, 4rem)',
-            color: '#1a3c5e',
-            letterSpacing: '-0.02em',
-            lineHeight: 1,
-            marginBottom: '0.4rem',
-            textShadow: '2px 3px 10px rgba(255,190,80,0.25), 0 1px 0 rgba(255,255,255,0.45)',
-          }}>
+        <header style={{ textAlign: 'center', paddingTop: '4.5rem', paddingBottom: '2.5rem' }}>
+          <h1
+            className="anim-title"
+            style={{
+              fontFamily: '"Noto Serif SC", serif',
+              fontWeight: 700,
+              fontSize: 'clamp(72px, 12vw, 96px)',
+              color: '#f5f0e8',
+              letterSpacing: '-0.02em',
+              lineHeight: 1,
+              marginBottom: '0.55rem',
+              textShadow: '0 0 40px rgba(200,160,80,0.30), 0 2px 0 rgba(0,0,0,0.4)',
+            }}
+          >
             聆·境
           </h1>
-          <p style={{
-            fontFamily: '"Noto Serif SC", serif',
-            color: '#c0846d',
-            fontSize: '0.8rem',
-            letterSpacing: '0.5em',
-            fontWeight: 300,
-          }}>
+          <p
+            className="anim-subtitle"
+            style={{
+              fontFamily: '"Noto Serif SC", serif',
+              color: 'rgba(245,240,232,0.4)',
+              fontSize: '0.78rem',
+              letterSpacing: '0.75em',
+              fontWeight: 300,
+              marginBottom: '0.9rem',
+            }}
+          >
             照片调音师
+          </p>
+          <p
+            className="anim-slogan"
+            style={{
+              fontFamily: '"Playfair Display", serif',
+              fontStyle: 'italic',
+              color: 'rgba(245,240,232,0.32)',
+              fontSize: '0.92rem',
+              letterSpacing: '0.04em',
+              lineHeight: 1.5,
+            }}
+          >
+            每一张照片，都藏着一首歌
           </p>
         </header>
 
         {/* Main content */}
-        <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 1rem 5rem' }}>
+        <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 1.25rem 6rem' }}>
           <div style={{ width: '100%', maxWidth: '440px' }}>
 
             {/* ── Result state ── */}
@@ -177,7 +194,7 @@ export default function App() {
 
             {/* ── Upload / Loading state ── */}
             {!result && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div className="anim-uploader" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <PhotoUploader onUpload={handleUpload} />
 
                 {/* Preview + analyze button */}
@@ -189,9 +206,9 @@ export default function App() {
                       style={{
                         maxHeight: '220px', maxWidth: '100%',
                         borderRadius: '14px', objectFit: 'cover',
-                        border: `1px solid ${deep(0.2)}`,
-                        boxShadow: '0 4px 20px rgba(26,82,118,0.18)',
-                        display: 'block', margin: '0 auto 1.25rem',
+                        border: '1px solid rgba(245,240,232,0.12)',
+                        boxShadow: '0 8px 40px rgba(0,0,0,0.55), 0 4px 20px rgba(180,120,50,0.15)',
+                        display: 'block', margin: '0 auto 1.4rem',
                       }}
                     />
                     <button className="btn-gold" onClick={handleAnalyze}>
@@ -206,14 +223,14 @@ export default function App() {
                     <div className="loading-ring" style={{ margin: '0 auto 1.5rem' }} />
                     <p className="pulse-text" style={{
                       fontFamily: '"Noto Serif SC", serif',
-                      color: deep(0.75),
+                      color: 'rgba(245,240,232,0.5)',
                       fontSize: '0.88rem',
                       letterSpacing: '0.22em',
                       marginBottom: '1.5rem',
                     }}>
                       正在聆听光与影的低语…
                     </p>
-                    <AudioWave active={false} height={50} />
+                    <AudioWave active={false} height={44} />
                   </div>
                 )}
 
@@ -221,7 +238,7 @@ export default function App() {
                 {error && (
                   <p style={{
                     textAlign: 'center',
-                    color: 'rgba(180,50,40,0.85)',
+                    color: 'rgba(220,100,90,0.8)',
                     fontFamily: '"Noto Serif SC", serif',
                     fontSize: '0.88rem',
                     letterSpacing: '0.05em',
@@ -235,13 +252,6 @@ export default function App() {
           </div>
         </main>
       </div>
-
-      {/* Fixed bottom wave (result state) */}
-      {result && (
-        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 5 }}>
-          <AudioWave active={true} height={55} />
-        </div>
-      )}
     </div>
   );
 }

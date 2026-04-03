@@ -7,12 +7,13 @@ interface PhotoUploaderProps {
 export function PhotoUploader({ onUpload }: PhotoUploaderProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const handleFile = (file: File) => {
     if (file.type.startsWith('image/')) onUpload(file);
   };
 
-  const deep = (a: number) => `rgba(26,82,118,${a})`;
+  const active = dragging || hovered;
 
   return (
     <div
@@ -20,27 +21,19 @@ export function PhotoUploader({ onUpload }: PhotoUploaderProps) {
       onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
       onDragLeave={() => setDragging(false)}
       onDrop={(e) => { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files[0]; if (f) handleFile(f); }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        border: dragging
-          ? '1.5px solid #c0846d'
-          : '1.5px dashed #c0846d',
-        /* Slightly irregular corners for aged-wall feel */
-        borderRadius: '20px 17px 19px 18px / 18px 20px 17px 21px',
-        padding: '3rem 2rem',
+        border: `1px dashed ${active ? 'rgba(245,240,232,0.45)' : 'rgba(245,240,232,0.15)'}`,
+        borderRadius: '20px',
+        padding: '3.5rem 2rem',
         textAlign: 'center',
         cursor: 'pointer',
-        background: dragging
-          ? 'rgba(253,246,227,0.95)'
-          : 'rgba(253,246,227,0.85)',
-        transition: 'all 0.3s ease',
-        backdropFilter: 'blur(14px)',
-        boxShadow: dragging
-          ? '0 12px 40px rgba(0,0,0,0.28), 0 4px 12px rgba(192,132,109,0.35), inset 0 1px 0 rgba(255,255,255,0.5)'
-          : '0 8px 30px rgba(0,0,0,0.22), 0 3px 10px rgba(192,132,109,0.25), inset 0 1px 0 rgba(255,255,255,0.5)',
-        backgroundImage: [
-          'radial-gradient(ellipse at 18% 25%, rgba(255,255,255,0.22) 0%, transparent 55%)',
-          'radial-gradient(ellipse at 82% 75%, rgba(220,180,150,0.10) 0%, transparent 50%)',
-        ].join(', '),
+        background: active ? 'rgba(245,240,232,0.03)' : 'transparent',
+        transition: 'all 0.35s ease',
+        boxShadow: active
+          ? '0 0 28px rgba(200,160,80,0.12), inset 0 0 40px rgba(200,160,80,0.04)'
+          : 'none',
       }}
     >
       <input
@@ -51,23 +44,38 @@ export function PhotoUploader({ onUpload }: PhotoUploaderProps) {
         onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
       />
 
-      {/* Icon */}
-      <div style={{ fontSize: '2.6rem', marginBottom: '1rem', opacity: 0.6, color: '#1a5276' }}>
-        ◈
+      {/* Music note icon */}
+      <div className="note-icon" style={{ marginBottom: '1.4rem', display: 'inline-block' }}>
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M17 33V17L36 12V28"
+            stroke="rgba(245,240,232,0.65)"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <circle cx="13.5" cy="33" r="4" stroke="rgba(245,240,232,0.65)" strokeWidth="1.4" />
+          <circle cx="32.5" cy="28" r="4" stroke="rgba(245,240,232,0.65)" strokeWidth="1.4" />
+        </svg>
       </div>
 
       <p style={{
         fontFamily: '"Noto Serif SC", serif',
-        color: '#1a5276',
-        fontSize: '1rem',
-        letterSpacing: '0.08em',
-        marginBottom: '0.5rem',
-        fontWeight: 500,
+        color: active ? 'rgba(245,240,232,0.75)' : 'rgba(245,240,232,0.5)',
+        fontSize: '0.95rem',
+        letterSpacing: '0.1em',
+        marginBottom: '0.55rem',
+        transition: 'color 0.3s',
       }}>
         上传一张照片，聆听它的旋律
       </p>
 
-      <p style={{ color: deep(0.45), fontSize: '0.78rem', letterSpacing: '0.1em' }}>
+      <p style={{
+        color: 'rgba(245,240,232,0.25)',
+        fontSize: '0.75rem',
+        letterSpacing: '0.12em',
+        fontFamily: '"Noto Serif SC", serif',
+      }}>
         拖放或点击选择 · JPEG / PNG / WEBP
       </p>
     </div>

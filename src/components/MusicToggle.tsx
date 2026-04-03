@@ -11,24 +11,20 @@ type PianoEvent = { time: string; notes: string | string[]; dur: string };
 type PadEvent   = { time: string; notes: string[];           dur: string };
 
 const PIANO_EVENTS: PianoEvent[] = [
-  // Bar 0 — Am
   { time: '0:0',   notes: 'A3',        dur: '4n' },
   { time: '0:1',   notes: 'C4',        dur: '4n' },
   { time: '0:2',   notes: 'E4',        dur: '4n' },
   { time: '0:2:2', notes: 'A4',        dur: '8n' },
   { time: '0:3',   notes: 'C4',        dur: '4n' },
-  // Bar 1 — F
   { time: '1:0',   notes: 'F3',        dur: '4n' },
   { time: '1:1',   notes: 'A3',        dur: '4n' },
   { time: '1:2',   notes: 'C4',        dur: '4n' },
   { time: '1:3',   notes: 'A3',        dur: '4n' },
-  // Bar 2 — C
   { time: '2:0',   notes: 'C4',        dur: '4n' },
   { time: '2:1',   notes: 'E4',        dur: '4n' },
   { time: '2:2',   notes: 'G4',        dur: '4n' },
   { time: '2:2:2', notes: 'C5',        dur: '8n' },
   { time: '2:3',   notes: 'E4',        dur: '4n' },
-  // Bar 3 — G
   { time: '3:0',   notes: 'G3',        dur: '4n' },
   { time: '3:1',   notes: 'B3',        dur: '4n' },
   { time: '3:2',   notes: 'D4',        dur: '4n' },
@@ -42,7 +38,6 @@ const PAD_EVENTS: PadEvent[] = [
   { time: '3:0', notes: ['G2', 'D3', 'G3'], dur: '1m' },
 ];
 
-// ── Component ─────────────────────────────────────────────────────────────────
 export function MusicToggle() {
   const [isPlaying, setIsPlaying]   = useState(false);
   const [isHovered, setIsHovered]   = useState(false);
@@ -140,19 +135,20 @@ export function MusicToggle() {
         height:         '38px',
         borderRadius:   '50%',
         background:     isHovered
-          ? 'rgba(26,82,118,0.18)'
-          : 'rgba(255,252,245,0.72)',
-        border:         `1px solid ${isPlaying ? 'rgba(26,82,118,0.7)' : 'rgba(26,82,118,0.28)'}`,
-        color:          isPlaying ? '#1a5276' : 'rgba(26,82,118,0.5)',
+          ? 'rgba(245,240,232,0.14)'
+          : 'rgba(245,240,232,0.08)',
+        border:         `1px solid ${isPlaying ? 'rgba(200,160,80,0.55)' : 'rgba(245,240,232,0.18)'}`,
+        color:          isPlaying ? 'rgba(200,160,80,0.9)' : 'rgba(245,240,232,0.5)',
         cursor:         'pointer',
         display:        'flex',
         alignItems:     'center',
         justifyContent: 'center',
         backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
         transition:     'all 0.3s ease',
         padding:        0,
         lineHeight:     1,
-        boxShadow:      '0 2px 10px rgba(26,82,118,0.12)',
+        boxShadow:      isPlaying ? '0 0 14px rgba(200,160,80,0.15)' : 'none',
       }}
     >
       {isPlaying ? (

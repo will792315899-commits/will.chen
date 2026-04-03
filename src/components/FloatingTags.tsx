@@ -4,21 +4,21 @@ interface FloatingTagsProps {
   tags: string[];
 }
 
-// Mediterranean tag colors — blue, teal, terracotta, sage, lavender
+// Warm white / amber tones for dark cinema theme
 const TAG_COLORS = [
-  'rgba(26,82,118,VAL)',
-  'rgba(72,201,176,VAL)',
-  'rgba(192,132,109,VAL)',
-  'rgba(74,124,89,VAL)',
-  'rgba(150,123,182,VAL)',
-  'rgba(52,152,219,VAL)',
+  'rgba(245,240,232,VAL)',
+  'rgba(200,160,80,VAL)',
+  'rgba(220,205,175,VAL)',
+  'rgba(180,150,100,VAL)',
+  'rgba(240,228,210,VAL)',
+  'rgba(160,138,98,VAL)',
 ];
 
 export function FloatingTags({ tags }: FloatingTagsProps) {
   const items = useMemo(
     () =>
       tags.map((tag, i) => {
-        const op = 0.28 + Math.random() * 0.42;
+        const op = 0.18 + Math.random() * 0.28;
         const bl = (Math.random() * 1.5).toFixed(1);
         const colorTemplate = TAG_COLORS[i % TAG_COLORS.length];
         return {
@@ -28,7 +28,7 @@ export function FloatingTags({ tags }: FloatingTagsProps) {
           duration: `${9 + Math.random() * 14}s`,
           delay: `${-(Math.random() * 12).toFixed(1)}s`,
           animClass: `float-${(i % 6) + 1}`,
-          fontSize: `${0.68 + Math.random() * 0.55}rem`,
+          fontSize: `${0.68 + Math.random() * 0.5}rem`,
           color: colorTemplate.replace('VAL', String(op)),
           op,
           bl,
@@ -62,7 +62,7 @@ export function FloatingTags({ tags }: FloatingTagsProps) {
               letterSpacing: '0.12em',
               userSelect: 'none',
               whiteSpace: 'nowrap',
-              textShadow: '0 1px 4px rgba(255,255,255,0.4)',
+              textShadow: '0 0 14px rgba(200,160,80,0.25)',
               '--op': op,
               '--bl': `${bl}px`,
             } as React.CSSProperties
