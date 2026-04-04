@@ -7,10 +7,12 @@
 }
 
 body {
-  background: #0d0d0d;
-  color: #f5f0e8;
-  font-family: "Noto Serif SC", serif;
+  background: linear-gradient(180deg, #cce8f4 0%, #dff0f7 10%, #f5fbff 28%, #ffffff 50%, #f5fbff 72%, #dff0f7 90%, #cce8f4 100%);
+  background-attachment: fixed;
+  color: #3a6b7c;
+  font-family: "Quicksand", "Noto Serif SC", sans-serif;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 /* ── Float animations for tags ── */
@@ -122,8 +124,8 @@ body {
 .loading-ring {
   width: 48px;
   height: 48px;
-  border: 1.5px solid rgba(245,240,232,0.12);
-  border-top-color: rgba(200,160,80,0.65);
+  border: 1.5px solid rgba(126,200,227,0.15);
+  border-top-color: #7ec8e3;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
@@ -141,34 +143,33 @@ body {
   animation: pulse-text 2.4s ease-in-out infinite;
 }
 
-/* ── Primary button ── */
+/* ── Primary button (light theme) ── */
 .btn-gold {
-  background: #f5f0e8;
+  background: linear-gradient(135deg, #7ec8e3, #a8d8ea);
   border: none;
-  color: #0d0d0d;
-  font-family: "Noto Serif SC", serif;
+  color: #fff;
+  font-family: "Quicksand", "Noto Serif SC", sans-serif;
   font-size: 0.95rem;
   letter-spacing: 0.18em;
   cursor: pointer;
   border-radius: 9999px;
   padding: 0.7rem 2.4rem;
   transition: all 0.35s ease;
-  box-shadow: none;
-  font-weight: 500;
+  box-shadow: 0 4px 18px rgba(126,200,227,0.3);
+  font-weight: 600;
 }
 
 .btn-gold:hover {
-  background: #ffffff;
-  box-shadow: 0 0 30px rgba(200,160,80,0.30), 0 0 65px rgba(200,160,80,0.12);
+  box-shadow: 0 6px 24px rgba(126,200,227,0.45);
   transform: translateY(-1px);
 }
 
-/* ── Ghost / secondary button ── */
+/* ── Ghost / secondary button (light theme) ── */
 .btn-ghost {
   background: none;
-  border: 1px solid rgba(245,240,232,0.18);
-  color: rgba(245,240,232,0.45);
-  font-family: "Noto Serif SC", serif;
+  border: 1px solid rgba(126,200,227,0.35);
+  color: rgba(58,107,124,0.65);
+  font-family: "Quicksand", "Noto Serif SC", sans-serif;
   font-size: 0.85rem;
   letter-spacing: 0.12em;
   cursor: pointer;
@@ -178,8 +179,9 @@ body {
 }
 
 .btn-ghost:hover {
-  color: rgba(245,240,232,0.85);
-  border-color: rgba(245,240,232,0.45);
+  color: #3a6b7c;
+  border-color: rgba(126,200,227,0.65);
+  background: rgba(126,200,227,0.06);
 }
 
 /* ── Scrollbar ── */

@@ -135,10 +135,10 @@ export function MusicToggle() {
         height:         '38px',
         borderRadius:   '50%',
         background:     isHovered
-          ? 'rgba(245,240,232,0.14)'
-          : 'rgba(245,240,232,0.08)',
-        border:         `1px solid ${isPlaying ? 'rgba(200,160,80,0.55)' : 'rgba(245,240,232,0.18)'}`,
-        color:          isPlaying ? 'rgba(200,160,80,0.9)' : 'rgba(245,240,232,0.5)',
+          ? 'rgba(126,200,227,0.22)'
+          : 'rgba(126,200,227,0.12)',
+        border:         `1px solid ${isPlaying ? 'rgba(126,200,227,0.65)' : 'rgba(126,200,227,0.3)'}`,
+        color:          isPlaying ? '#7ec8e3' : 'rgba(58,107,124,0.6)',
         cursor:         'pointer',
         display:        'flex',
         alignItems:     'center',
@@ -148,7 +148,7 @@ export function MusicToggle() {
         transition:     'all 0.3s ease',
         padding:        0,
         lineHeight:     1,
-        boxShadow:      isPlaying ? '0 0 14px rgba(200,160,80,0.15)' : 'none',
+        boxShadow:      isPlaying ? '0 0 14px rgba(126,200,227,0.3)' : 'none',
       }}
     >
       {isPlaying ? (
