@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" data-layout="standard">
+<head>
+  <meta charset="utf-8">
+  <title>AI Disclosure & Fashion — Defense (Morandi)</title>
+  <!-- ROOT = ../../.claude/skills/orca-ppt -->
+  <link rel="stylesheet" href="../../.claude/skills/orca-ppt/node_modules/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../../.claude/skills/orca-ppt/node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../../.claude/skills/orca-ppt/runtime/tokens.css">
+  <link rel="stylesheet" href="../../.claude/skills/orca-ppt/runtime/themes/soft-editorial.css">
+  <link rel="stylesheet" href="../../.claude/skills/orca-ppt/runtime/palettes/morandi.css">
+</head>
+<body>
+<div class="reveal">
+
+<!-- 版式 standard · 主题 soft-editorial · 配色 morandi
+     转场计划（先关系，再手法）
+1→2   封面强调条 → 章节页装饰条                        共享元素   data-id=bar
+2→3   章节条 → 背景页标题下的强调条                      共享元素   data-id=bar
+3→4   同为列表页，内容往后流                            元素交接   carry
+4→5   标题条留下，换成理论对照页                        共享元素   data-id=bar
+5→6   标题条留下，换成假设列表                          共享元素   data-id=bar
+6→7   换话题，进入「方法」部分                          遮挡剪辑   mask up (#1)
+7→8   章节条 → 设计对照页标题条                          共享元素   data-id=bar
+8→9   标题条留下，换成样本数据页                        共享元素   data-id=bar
+9→10  换话题，进入「结果」部分                          遮挡剪辑   mask up (#2)
+10→11 章节条 → 操纵检验数据页标题条                      共享元素   data-id=bar
+11→12 同为数据页，大数字 0.010→0.162 交接               元素交接   carry
+12→13 标题条留下，换成 H2–H5 列表                        共享元素   data-id=bar
+13→14 标题条留下，换成核心发现数据页                     共享元素   data-id=bar
+14→15 从核心发现页的小圆点钻进「讨论」部分                整页推近   zoom (#1) z1
+15→16 从章节页的小圆点钻进「归因」列表                    整页推近   zoom (#2) z2
+16→17 标题条留下，换成启示对照页                         共享元素   data-id=bar
+17→18 标题条 → 结尾强调条                               共享元素   data-id=bar
+-->
+
+<div class="slides">
+
+  <!-- 1 · COVER -->
+  <section data-auto-animate data-page="cover" data-hold="2">
+    <p class="t-label t-dim" style="left:120px; top:288px; width:1680px; text-align:center;">MSc Digital Marketing &amp; Artificial Intelligence · 2026</p>
+    <p class="t-display" style="left:120px; top:352px; width:1680px; text-align:center;">AI Disclosure</p>
+    <p class="t-body t-dim" style="left:360px; top:576px; width:1200px; text-align:center;">and Consumer Purchase Intention in Fashion Advertising</p>
+    <div data-id="bar" class="s-accent" style="left:880px; top:684px; width:160px; height:8px;"></div>
+    <p class="t-body" style="left:360px; top:748px; width:1200px; text-align:center;">Chen PAN &nbsp;·&nbsp; Yang YU &nbsp;&nbsp;|&nbsp;&nbsp; Supervisor: María Olmedilla Fernández</p>
+  </section>
+
+  <!-- 2 · SECTION 01 -->
+  <section data-auto-animate data-page="section" data-hold="1.5">
+    <p class="t-body t-dim" style="left:120px; top:360px;">Part 01</p>
+    <p class="t-display" style="left:120px; top:440px;">Introduction</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:640px; width:120px; height:8px;"></div>
+  </section>
+
+  <!-- 3 · LIST · Background -->
+  <section data-auto-animate data-page="list" data-hold="3">
+    <p class="t-h1" data-carry="title" style="left:120px; top:80px;">Background</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <div class="s-surface" style="left:120px; top:240px; width:1680px; height:760px;"></div>
+    <p class="t-h2 t-on-surface" data-carry="i1" style="left:200px; top:320px; width:1520px;">Generative AI now makes the ad</p>
+    <p class="t-body t-on-surface" data-carry="i1b" style="left:200px; top:392px; width:1520px;">Midjourney, DALL·E and Stable Diffusion produce photoreal fashion campaigns at a fraction of the cost.</p>
+    <p class="t-h2 t-on-surface" data-carry="i2" style="left:200px; top:520px; width:1520px;">Regulators are moving to mandatory labels</p>
+    <p class="t-body t-on-surface" data-carry="i2b" style="left:200px; top:592px; width:1520px;">The EU, UK and US are heading toward compulsory disclosure of AI-generated content.</p>
+    <p class="t-h2 t-on-surface" data-carry="i3" style="left:200px; top:720px; width:1520px;">But consumer response is barely understood</p>
+    <p class="t-body t-on-surface" data-carry="i3b" style="left:200px; top:792px; width:1520px;">Does revealing an ad is AI-made change what people buy? Evidence is thin — and Western-centric.</p>
+  </section>
+
+  <!-- 4 · LIST · Objective & RQ (carry from 3) -->
+  <section data-auto-animate data-st="carry" data-page="list" data-hold="3">
+    <p class="t-h1" data-carry="title" style="left:120px; top:80px;">Objective &amp; Research Question</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <div class="s-surface" style="left:120px; top:240px; width:1680px; height:760px;"></div>
+    <p class="t-h2 t-on-surface" data-carry="i1" style="left:200px; top:320px;">The gap</p>
+    <p class="t-body t-on-surface" data-carry="i1b" style="left:200px; top:392px; width:1520px;">Consumer reactions to AI disclosure are under-studied outside Western markets.</p>
+    <p class="t-h2 t-on-surface" data-carry="i2" style="left:200px; top:496px;">The objective</p>
+    <p class="t-body t-on-surface" data-carry="i2b" style="left:200px; top:568px; width:1520px;">Test whether disclosure lowers purchase intention — and uncover the mechanism and boundaries.</p>
+    <div class="s-accent-soft" style="left:160px; top:680px; width:1600px; height:240px;"></div>
+    <p class="t-h2 t-on-accent" data-carry="i3" style="left:200px; top:720px;">Research question</p>
+    <p class="t-body t-on-accent" data-carry="i3b" style="left:200px; top:792px; width:1520px;">Does disclosing that a fashion ad is AI-generated reduce purchase intention — and if so, why and for whom?</p>
+  </section>
+
+  <!-- 5 · COMPARE · Two theories -->
+  <section data-auto-animate data-page="compare" data-hold="3">
+    <p class="t-h1" style="left:120px; top:80px;">Two Theoretical Lenses</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <div class="s-surface" style="left:120px; top:240px; width:800px; height:760px;"></div>
+    <p class="t-h2 t-on-surface" style="left:160px; top:300px; width:720px;">Persuasion Knowledge Model</p>
+    <p class="t-body t-on-surface" style="left:160px; top:392px; width:720px;">Friestad &amp; Wright, 1994</p>
+    <p class="t-body t-on-surface" style="left:160px; top:520px; width:720px;">Consumers draw on persuasion knowledge to cope with marketer tactics. A disclosure label can act as a cue that activates this coping — inviting scepticism.</p>
+    <div class="s-accent-soft" style="left:1000px; top:240px; width:800px; height:760px;"></div>
+    <p class="t-h2 t-on-accent" style="left:1040px; top:300px; width:720px;">Stimulus – Organism – Response</p>
+    <p class="t-body t-on-accent" style="left:1040px; top:392px; width:720px;">Mehrabian &amp; Russell, 1974</p>
+    <p class="t-body t-on-accent" style="left:1040px; top:520px; width:720px;">A stimulus (the disclosure) shifts internal states — perceived authenticity, persuasion knowledge — which drive the response: purchase intention.</p>
+  </section>
+
+  <!-- 6 · LIST · Hypotheses -->
+  <section data-auto-animate data-page="list" data-hold="3">
+    <p class="t-h1" style="left:120px; top:80px;">Five Hypotheses</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <div class="s-surface" style="left:120px; top:240px; width:1680px; height:760px;"></div>
+    <p class="t-h2 t-on-surface" style="left:200px; top:320px; width:1520px;">H1 · Disclosure lowers purchase intention</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:440px; width:1520px;">H2 · …mediated by perceived authenticity</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:560px; width:1520px;">H3 · …mediated by persuasion knowledge</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:680px; width:1520px;">H4 · Effect is stronger for hedonic products</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:800px; width:1520px;">H5 · AI literacy weakens the effect</p>
+  </section>
+
+  <!-- 7 · SECTION 02 (mask #1) -->
+  <section data-st="mask" data-st-direction="up" data-page="section" data-hold="1.5">
+    <p class="t-body t-dim" style="left:120px; top:360px;">Part 02</p>
+    <p class="t-display" style="left:120px; top:440px;">Method</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:640px; width:120px; height:8px;"></div>
+  </section>
+
+  <!-- 8 · COMPARE · Design -->
+  <section data-auto-animate data-page="compare" data-hold="3">
+    <p class="t-h1" style="left:120px; top:80px;">One Ad, Two Versions</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <p class="t-label t-dim" style="left:120px; top:200px;">Between-subjects · online (Wenjuanxing) · fictitious sneaker brand AXEN · €69</p>
+    <div class="s-surface" style="left:120px; top:280px; width:800px; height:720px;"></div>
+    <p class="t-h2 t-on-surface" style="left:160px; top:340px; width:720px;">Control · n = 71</p>
+    <p class="t-body t-on-surface" style="left:160px; top:440px; width:720px;">Sees the AXEN sneaker advertisement with no disclosure label.</p>
+    <div class="s-accent-soft" style="left:1000px; top:280px; width:800px; height:720px;"></div>
+    <p class="t-h2 t-on-accent" style="left:1040px; top:340px; width:720px;">Disclosure · n = 66</p>
+    <p class="t-body t-on-accent" style="left:1040px; top:440px; width:720px;">Sees the same advertisement carrying an "AI-generated" label.</p>
+  </section>
+
+  <!-- 9 · DATA · Sample & reliability -->
+  <section data-auto-animate data-page="data" data-hold="3">
+    <p class="t-h1" style="left:120px; top:80px;">Sample &amp; Reliability</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <p class="t-metric" style="left:120px; top:320px;">137</p>
+    <p class="t-h2" style="left:120px; top:680px;">participants</p>
+    <p class="t-body t-dim" style="left:120px; top:760px; width:800px;">66 disclosure · 71 control · mostly Chinese · mean age 38.3 · every scale Cronbach's α = .89–.94.</p>
+    <div class="s-surface" style="left:1000px; top:240px; width:800px; height:760px;"></div>
+    <div class="s-accent" data-enter="grow-up" data-auto-animate-delay="0.6" style="left:1160px; top:471px; width:160px; height:409px;"></div>
+    <div class="s-surface-2" data-enter="grow-up" data-auto-animate-delay="0.7" style="left:1440px; top:440px; width:160px; height:440px;"></div>
+    <div class="s-accent" style="left:1040px; top:880px; width:720px; height:4px;"></div>
+    <p class="t-body t-on-surface" data-auto-animate-delay="1.0" style="left:1130px; top:900px; width:220px; text-align:center;">Disc. 66</p>
+    <p class="t-body t-on-surface" data-auto-animate-delay="1.0" style="left:1410px; top:900px; width:220px; text-align:center;">Ctrl 71</p>
+  </section>
+
+  <!-- 10 · SECTION 03 (mask #2) -->
+  <section data-st="mask" data-st-direction="up" data-page="section" data-hold="1.5">
+    <p class="t-body t-dim" style="left:120px; top:360px;">Part 03</p>
+    <p class="t-display" style="left:120px; top:440px;">Results</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:640px; width:120px; height:8px;"></div>
+  </section>
+
+  <!-- 11 · DATA · Manipulation check -->
+  <section data-auto-animate data-page="data" data-hold="3">
+    <p class="t-h1" data-carry="title" style="left:120px; top:80px;">Manipulation Check</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <p class="t-metric" data-carry="metric" style="left:120px; top:320px;">.010</p>
+    <p class="t-h2" data-carry="caption" style="left:120px; top:680px;">the label worked (p = .010)</p>
+    <p class="t-body t-dim" data-carry="body" style="left:120px; top:760px; width:800px;">It shifted AI-attribution beliefs as intended — but the contrast was weak.</p>
+    <div class="s-accent-soft" style="left:1240px; top:400px; width:320px; height:320px; border-radius:50%;"></div>
+    <p class="t-h1 t-on-accent" style="left:1240px; top:520px; width:320px; text-align:center;">50.7%</p>
+    <p class="t-h2" style="left:1160px; top:760px; width:480px; text-align:center;">of controls already assumed AI</p>
+  </section>
+
+  <!-- 12 · DATA · H1 main effect (carry from 11) -->
+  <section data-auto-animate data-st="carry" data-page="data" data-hold="3">
+    <p class="t-h1" data-carry="title" style="left:120px; top:80px;">H1 · Main Effect</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <p class="t-metric" data-carry="metric" style="left:120px; top:320px;">.162</p>
+    <p class="t-h2" data-carry="caption" style="left:120px; top:680px;">p-value of the main effect</p>
+    <p class="t-body t-dim" data-carry="body" style="left:120px; top:760px; width:800px;">t(135) = 1.41, n.s. Disclosure did not lower purchase intention — it was slightly higher.</p>
+    <div class="s-surface" style="left:1000px; top:240px; width:800px; height:760px;"></div>
+    <div class="s-accent" data-enter="grow-up" data-auto-animate-delay="0.6" style="left:1160px; top:534px; width:160px; height:346px;"></div>
+    <div class="s-surface-2" data-enter="grow-up" data-auto-animate-delay="0.7" style="left:1440px; top:558px; width:160px; height:322px;"></div>
+    <div class="s-accent" style="left:1040px; top:880px; width:720px; height:4px;"></div>
+    <p class="t-body t-on-surface" data-auto-animate-delay="1.0" style="left:1130px; top:900px; width:220px; text-align:center;">Disc. 5.51</p>
+    <p class="t-body t-on-surface" data-auto-animate-delay="1.0" style="left:1410px; top:900px; width:220px; text-align:center;">Ctrl 5.12</p>
+  </section>
+
+  <!-- 13 · LIST · H2–H5 not supported -->
+  <section data-auto-animate data-page="list" data-hold="3">
+    <p class="t-h1" style="left:120px; top:80px;">The Other Four: All Null</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <div class="s-surface" style="left:120px; top:240px; width:1680px; height:760px;"></div>
+    <p class="t-h2 t-on-surface" style="left:200px; top:320px; width:1520px;">H2 · Mediation via authenticity — not supported (CI incl. 0)</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:440px; width:1520px;">H3 · Mediation via persuasion knowledge — not supported</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:560px; width:1520px;">H4 · Moderation by product hedonism — n.s. (p = .601)</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:680px; width:1520px;">H5 · Moderation by AI literacy — n.s. (p = .514)</p>
+  </section>
+
+  <!-- 14 · DATA · Key finding (has zoom origin z1) -->
+  <section data-auto-animate data-page="data" data-hold="3">
+    <p class="t-h1" style="left:120px; top:80px;">The One Strong Finding</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <p class="t-metric" style="left:120px; top:320px;">.77</p>
+    <p class="t-h2" style="left:120px; top:680px; width:800px;">β · authenticity → purchase intention</p>
+    <p class="t-body t-dim" style="left:120px; top:760px; width:800px;">Perceived authenticity strongly predicts purchase intention (b = 0.81, p &lt; .001).</p>
+    <div class="s-surface" style="left:1000px; top:240px; width:800px; height:760px;"></div>
+    <p class="t-display t-on-surface" data-auto-animate-delay="0.6" style="left:1000px; top:440px; width:800px; text-align:center;">84.4%</p>
+    <p class="t-h2 t-on-surface" data-auto-animate-delay="0.8" style="left:1040px; top:640px; width:720px; text-align:center;">of the variance in purchase intention explained</p>
+    <div data-zoom="z1" class="s-dot" style="left:1740px; top:120px; width:40px; height:40px;"></div>
+  </section>
+
+  <!-- 15 · SECTION 04 (zoom-through from z1; has z2 for next) -->
+  <section data-st="zoom-through" data-st-from="z1" data-page="section" data-hold="1.5">
+    <p class="t-body t-dim" style="left:120px; top:360px;">Part 04</p>
+    <p class="t-display" style="left:120px; top:440px;">Discussion</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:640px; width:120px; height:8px;"></div>
+    <div data-zoom="z2" class="s-dot" style="left:120px; top:720px; width:40px; height:40px;"></div>
+  </section>
+
+  <!-- 16 · LIST · Interpreting the null (zoom-through from z2) -->
+  <section data-auto-animate data-st="zoom-through" data-st-from="z2" data-page="list" data-hold="3">
+    <p class="t-h1" style="left:120px; top:80px;">Why No Effect?</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <div class="s-surface" style="left:120px; top:240px; width:1680px; height:760px;"></div>
+    <p class="t-h2 t-on-surface" style="left:200px; top:320px; width:1520px;">1 · Chinese sample — higher baseline acceptance of AI</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:440px; width:1520px;">2 · Weak contrast — half of controls already assumed AI</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:560px; width:1520px;">3 · Mid-market sneaker — no luxury heritage to threaten</p>
+    <p class="t-h2 t-on-surface" style="left:200px; top:680px; width:1520px;">4 · Consistent with recent nulls (Koning &amp; Voorveld, 2025)</p>
+    <p class="t-body t-on-surface" style="left:200px; top:820px; width:1520px;">Powered only for medium-to-large effects — the null bounds an effect rather than excluding it.</p>
+  </section>
+
+  <!-- 17 · COMPARE · Implications -->
+  <section data-auto-animate data-page="compare" data-hold="3">
+    <p class="t-h1" style="left:120px; top:80px;">What It Means</p>
+    <div data-id="bar" class="s-accent" style="left:120px; top:184px; width:120px; height:8px;"></div>
+    <p class="t-label t-dim" style="left:120px; top:200px;">Limits: convenience sample · single product · cross-sectional → next: EU &amp; luxury samples, longitudinal</p>
+    <div class="s-surface" style="left:120px; top:280px; width:800px; height:720px;"></div>
+    <p class="t-h2 t-on-surface" style="left:160px; top:340px; width:720px;">Practical</p>
+    <p class="t-body t-on-surface" style="left:160px; top:440px; width:720px;">In high-AI-literacy markets, disclosure may carry little sales risk. Invest in authenticity, not in hiding the label.</p>
+    <div class="s-accent-soft" style="left:1000px; top:280px; width:800px; height:720px;"></div>
+    <p class="t-h2 t-on-accent" style="left:1040px; top:340px; width:720px;">Theoretical</p>
+    <p class="t-body t-on-accent" style="left:1040px; top:440px; width:720px;">AI-disclosure effects are context-dependent. Western-sample findings should not be over-generalised.</p>
+  </section>
+
+  <!-- 18 · CLOSING -->
+  <section data-auto-animate data-page="closing" data-hold="3">
+    <p class="t-display" style="left:120px; top:392px; width:1680px; text-align:center;">How, not whether</p>
+    <div data-id="bar" class="s-accent" style="left:880px; top:600px; width:160px; height:8px;"></div>
+    <p class="t-body t-dim" style="left:360px; top:664px; width:1200px; text-align:center;">The question is not whether to disclose AI — but how to preserve authenticity.</p>
+    <p class="t-body" style="left:360px; top:768px; width:1200px; text-align:center;">Thank you &nbsp;·&nbsp; Chen PAN &amp; Yang YU</p>
+  </section>
+
+</div>
+</div>
+<script src="../../.claude/skills/orca-ppt/node_modules/reveal.js/dist/reveal.js"></script>
+<script src="../../.claude/skills/orca-ppt/node_modules/gsap/dist/gsap.min.js"></script>
+<script src="../../.claude/skills/orca-ppt/runtime/engine.js"></script>
+</body>
+</html>
