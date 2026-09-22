@@ -1,0 +1,44 @@
+/* 主题：Scholarly（学术清晰版）
+ * 标签：minimal / academic
+ * 一句话：正式、清晰、好读的答辩风——衬线标题 + 无衬线正文，数字用等宽定高字形，
+ *          彻底解决旧式花体数字「1 像 I」的辨识问题。
+ * 默认配色：morandi
+ * 在 tokens.css 之后引入。规则见 references/themes.md。
+ *
+ * 字体：标题、数字、条目用 Source Serif 4（清晰的定高数字）；.t-body、.t-label 用 Inter。
+ * 关键：.t-display / .t-metric 强制 lining-nums + tabular-nums —— 数字全部定高、等宽，
+ *       不会出现旧式数字把 1 写成 I 的情况。
+ *
+ * 本主题新增的类：无（沿用 tokens.css 的 .t-label，仅改字体/字距/大小写）。
+ */
+@import url("../fonts/fonts.css");
+
+:root {
+  --radius-s: 16px;
+  --radius-m: 20px;
+  --radius-l: 28px;
+
+  --font: "Source Serif 4", Georgia, "Songti SC", serif;
+  --font-sans: "Inter", "PingFang SC", -apple-system, sans-serif;
+}
+
+/* 库里 Source Serif 4 只有 400/500 两档，字重统一到 500，避免浏览器合成假粗体 */
+.t-display, .t-metric, .t-h1, .t-h2 { font-weight: 500; }
+
+.t-display { letter-spacing: -0.01em; font-variant-numeric: lining-nums tabular-nums; }
+.t-metric  { letter-spacing: -0.015em; font-variant-numeric: lining-nums tabular-nums; }
+.t-h1      { letter-spacing: -0.005em; }
+.t-h2      { line-height: 1.25; }
+
+.t-body    { font-family: var(--font-sans); line-height: 1.5; font-variant-numeric: lining-nums; }
+
+/* 小标签：改无衬线 + 自然大小写（不再全大写），更好读、更现代 */
+.t-label {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  text-transform: none;
+  white-space: nowrap;
+}
